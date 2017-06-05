@@ -5,6 +5,7 @@ set -e
 version=`cat version/number`
 
 app_name=${CF_APP_NAME}-${version}
+host_name=${CF_HOSTNAME}
 
 green_app_route=${CF_HOSTNAME}-${version}
 green_app_route="${green_app_route//./_}"
@@ -45,6 +46,7 @@ app_names=`(cf curl $apps_url | jq -r '.resources[].entity.name')`
 for name in $app_names; do
     if [ "$name" != "$app_name" ]
     then
-      # TO DO: clean up blue
+      cf unmap-route $name $domains_url --hostname $host_name
+      cf delete $name
     fi
 done
