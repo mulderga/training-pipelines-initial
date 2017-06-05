@@ -70,7 +70,7 @@ jobs:
     - get: version
       passed: [build]
     - get: pipelines
-  - task: blue-green-deploy
+  - task: build
     file: {{deploy_dev_task}}
     params:
       CF_APP_NAME: {{app_name}}
