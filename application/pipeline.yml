@@ -83,6 +83,19 @@ jobs:
       CF_MANIFEST: {{cf_dev_manifest}}
       CF_DOMAIN: {{cf_dev_domain}}
 
+- name: integration-test
+  plan:
+  - aggregate:
+    - get: artifact
+      passed: [deploy-dev]
+      trigger: true
+    - get: version
+      params: {bump: patch}
+    task: test
+    file: {{run_it_task}}
+  - put: version
+    params: {file: version/number}
+
 - name: major
   serial_groups: [version]
   plan:
