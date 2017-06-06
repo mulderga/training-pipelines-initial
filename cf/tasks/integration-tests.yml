@@ -7,9 +7,7 @@ image_resource:
     repository: rscale/cf-cli
 
 inputs:
-- name: app
 - name: version
-- name: pipelines
 - name: artifact
 
 run:
