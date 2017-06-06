@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -x
 
 version=`cat version/number`
 
@@ -42,6 +42,12 @@ apps_url=`cf curl $routes_url | jq -r '.resources[].entity | select(.host=="'"$C
 
 # Fetch the app names assigned to the hostname
 app_names=`(cf curl $apps_url | jq -r '.resources[].entity.name')`
+
+echo "starting echo:"
+echo "name: ${name}"
+echo "name: ${app_name}"
+echo "name: ${domains_url}"
+echo "name: ${host_name}"
 
 for name in $app_names; do
     if [ "$name" != "$app_name" ]
