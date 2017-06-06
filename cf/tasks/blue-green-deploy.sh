@@ -5,7 +5,6 @@ set -x
 version=`cat version/number`
 
 app_name=${CF_APP_NAME}-${version}
-host_name=${CF_HOSTNAME}
 
 green_app_route=${CF_HOSTNAME}-${version}
 green_app_route="${green_app_route//./_}"
@@ -52,7 +51,7 @@ echo "name: ${host_name}"
 for name in $app_names; do
     if [ "$name" != "$app_name" ]
     then
-      cf unmap-route $name $domains_url --hostname $host_name
+      cf unmap-route $name $CF_DOMAIN --hostname $CF_HOSTNAME
       cf delete $name
     fi
 done
