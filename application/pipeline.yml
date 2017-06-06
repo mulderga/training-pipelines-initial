@@ -91,7 +91,7 @@ jobs:
       trigger: true
     - get: version
       params: {bump: patch}
-    task: test
+  - task: test
     file: {{run_it_task}}
   - put: version
     params: {file: version/number}
