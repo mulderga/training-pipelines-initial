@@ -9,6 +9,7 @@ image_resource:
 inputs:
 - name: version
 - name: artifact
+- name: pipelines
 
 run:
   path: pipelines/cf/tasks/integration-tests.sh
